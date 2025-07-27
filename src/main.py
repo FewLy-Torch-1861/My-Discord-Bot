@@ -5,6 +5,7 @@ import os
 
 # Import command setup functions
 from commands.mute import setup_mute_command
+from commands.unmute import setup_unmute_command
 from commands.say import setup_say_command
 from commands.ping import setup_ping_command
 
@@ -39,6 +40,9 @@ GUILD_ID = discord.Object(id=os.getenv("GUILD_ID"))
 
 # Command to mute a user
 setup_mute_command(bot, GUILD_ID)
+
+# Command to unmute a user
+setup_unmute_command(bot, GUILD_ID)
 
 # Command to make the bot say something
 # Requires the user to have the 'manage_messages' permission

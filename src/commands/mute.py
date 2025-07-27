@@ -10,7 +10,13 @@ def setup_mute_command(bot, GUILD_ID):
     @app_commands.describe(
         time="Time in seconds to mute the user (default is 5 minutes)"
     )
-    async def mute_command(interaction: Interaction, user: Member, time: int = 300):
+    @app_commands.describe(reason="Reason for muting the user")
+    async def mute_command(
+        interaction: Interaction,
+        user: Member,
+        time: int = 300,
+        reason: str = "No reason provided",
+    ):
         # Check if the command user has permission to mute members
         if interaction.user.guild_permissions.mute_members:
 
@@ -47,7 +53,8 @@ def setup_mute_command(bot, GUILD_ID):
 
             # Apply the mute (timeout) to the user
             await user.timeout(
-                timedelta(seconds=time), reason=f"Muted by {interaction.user.name}"
+                timedelta(seconds=time),
+                reason=f"Muted by {interaction.user.name} for {reason}",
             )
             await interaction.response.send_message(
                 f"{user.mention} has been muted for `{time}` seconds.", ephemeral=True
@@ -56,7 +63,7 @@ def setup_mute_command(bot, GUILD_ID):
             print(
                 f"Mute command used by {interaction.user.name} in guild {interaction.guild.name} ({interaction.guild.id})"
             )
-            print(f"Muted {user.name} for {time} seconds")
+            print(f"Muted {user.name} for {time} seconds with reason: {reason}")
         else:
             # Inform the user if they lack permissions
             await interaction.response.send_message(
