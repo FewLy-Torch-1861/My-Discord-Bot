@@ -31,14 +31,19 @@ def setup_mute_command(bot, GUILD_ID):
                 time = 300  # Default mute time is 5 minutes
 
                 await interaction.response.send_message(
-                    f"Time not specified, defaulting to 5 minutes (300 seconds).",
+                    f"Time not specified, defaulting to `5` minutes (`300` seconds).",
                     ephemeral=True,
                 )
+
+                return
             elif time > 21600:
                 await interaction.response.send_message(
-                    "Time cannot exceed 6 hours (21600 seconds).", ephemeral=True
+                    "Time cannot exceed `6` hours (`21600` seconds).", ephemeral=True
                 )
+
                 return
+            else:
+                pass  # Time is valid, proceed with muting
 
             # Apply the mute (timeout) to the user
             await user.timeout(
