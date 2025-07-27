@@ -7,7 +7,9 @@ def setup_say_command(bot, GUILD_ID):
     )
     @app_commands.describe(message="The message for the bot to say")
     async def say_command(interaction: Interaction, message: str):
+        # Check if the user has permission to manage messages
         if interaction.user.guild_permissions.manage_messages:
+            # Send the message to the channel
             await interaction.response.send_message("Message sent!", ephemeral=True)
             await interaction.channel.send(message)
 
@@ -16,6 +18,7 @@ def setup_say_command(bot, GUILD_ID):
             )
             print(f"Message: {message}")
         else:
+            # Inform the user they lack permission
             await interaction.response.send_message(
                 f"{interaction.user.mention}, You do not have permission to use this command.",
                 ephemeral=True,
