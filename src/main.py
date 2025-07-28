@@ -28,15 +28,17 @@ async def on_ready():
 
     try:
         guild = discord.Object(id=os.getenv("GUILD_ID"))
-        synced = await bot.tree.sync(guild=guild)
-        print(f"Synced {len(synced)} commands to the guild {guild.id}")
+        # synced = await bot.tree.sync(guild=guild)
+        synced = await bot.tree.sync()
+        # print(f"Synced {len(synced)} commands to the guild {guild.id}")
+        print(f"Synced {len(synced)} commands")
         print("Commands synced successfully.")
     except Exception as e:
         print(f"Failed to sync commands: {e}")
 
 
 # Guild ID for faster command registration
-GUILD_ID = discord.Object(id=os.getenv("GUILD_ID"))
+GUILD_ID = None  # discord.Object(id=os.getenv("GUILD_ID"))
 
 # Command to mute a user
 setup_mute_command(bot, GUILD_ID)
