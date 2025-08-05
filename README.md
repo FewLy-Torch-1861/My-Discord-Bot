@@ -13,6 +13,11 @@ _just want to make my own discord bot_
 - `/say` — Make the bot repeat your message.
 - `/ping` — Check bot ping.
 
+## ToDo
+
+- [ ] more mod command
+- [ ] logging
+
 ##
 
 _created on Archlinux using Neovim btw._
